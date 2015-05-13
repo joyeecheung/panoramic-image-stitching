@@ -15,10 +15,10 @@ disp('Finish reading images');
 %f = size(images, 1);
 % focal length in pixels = (image largest dimension in pixels)
 %                          * (focal length in mm) / (sensor width in mm)
-f = size(images, 2) * 8.2 / 7.11;  % portrait layout -> image height
+f = size(images, 2) * 8.2 / 7.11;
 % radial distortion constants
-k1 = -0.15;
-k2 = 0;
+k1 = -0.17;
+k2 = 0.2;
 fprintf('f = %f, k1 = %f, k2 = %f\n', f, k1, k2);
 %k1 = -0.18533;
 %k2 = 0.21517;
