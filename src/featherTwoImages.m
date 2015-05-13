@@ -25,11 +25,8 @@ xbase = 0;
 newImg = double(zeros(ybase+int32(rydim), xbase+int32(rxdim),3));
 
 %Assign the first image
-
-% newImg(1+ybase:h1+ybase, 1+xbase:w1+xbase) = double(image1(1:h1, 1:w1))
-
-for y = 1 : size(image1,1)
-    for x = 1 : size(image1,2)
+for y = 1 : h1
+    for x = 1 : w1
         newImg(y+ybase,x+xbase,:) = double(image1(y,x,:));
     end
 end

@@ -2,7 +2,7 @@
 %Input: proj_images - input images
 %       blendingType - 1: featering 2: Pyramid 3: multiBand
 %Ouput: panormicImg
-function finalImage = stitch(proj_images, blendType, exposureCorrection)
+function finalImage = stitch(proj_images)
     curYshift = 0;
     yShiftSum = 0;
     for i = 1 : size(proj_images,4)-1
@@ -13,35 +13,15 @@ function finalImage = stitch(proj_images, blendType, exposureCorrection)
         yShiftSum = yShiftSum + yshift;
         curXshift = xshift;
         curYshift = -curYshift + yshift;
-        if exposureCorrection
-            if i < size(proj_images,4)-1
-                Ic = proj_images(:,:,:,i + 2);
-                Ib = ECChangeColor(Ib, Ia, Ic);
-            end
-        end
-        
         if i == 1
-            if blendType == 1
-                panoramicImg = featherTwoImages(Ia,Ib,curXshift,curYshift);
-            elseif blendType == 2            
-                panoramicImg = ECPyramidBlending(Ia,Ib,curXshift,curYshift);
-            elseif blendType == 3
-                panoramicImg = multiBlendTwoImages(Ia,Ib,curXshift,curYshift);
-            end
+            panoramicImg = featherTwoImages(Ia,Ib,curXshift,curYshift);
         else
-            if blendType == 1
-                panoramicImg = featherTwoImages(panoramicImg,Ib,curXshift,curYshift);
-            elseif blendType == 2
-                panoramicImg = ECPyramidBlending(panoramicImg,Ib,curXshift,curYshift);
-            elseif blendType == 3
-                panoramicImg = multiBlendTwoImages(panoramicImg,Ib,curXshift,curYshift);
-            end
+            panoramicImg = featherTwoImages(panoramicImg,Ib,curXshift,curYshift);
         end
     end
     finalImage = panoramicImg;
     imwrite(finalImage,'../result/raw_stitched.jpg');
     finalImage = driftImage(panoramicImg, yShiftSum);
-    imshow(finalImage)
 end
 
 function finalImage = driftImage(inputImage, yShiftSum)
