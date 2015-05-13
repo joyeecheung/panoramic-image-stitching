@@ -1,0 +1,5 @@
+temp/
+*~
+*.jpg
+Thumbs.db
+vlfeat-0.9.20
