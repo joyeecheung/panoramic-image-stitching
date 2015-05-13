@@ -39,5 +39,5 @@ function finalImage = driftImage(inputImage, yShiftSum)
             finalImage(i, j, :) = inputImage(newHeightValue, j, :);
         end
     end
-    finalImage = uint8(cropOneImage(finalImage));
+    finalImage = uint8(cropOne(finalImage));
 end
