@@ -3,7 +3,7 @@
 %           f      - focal length of the camera
 %           k1, k2 - radial distortion coefficients of the camera
 %  output:  projectedImages - The projected images
-function projectedImages = cylindricalProjection(images, f, k1, k2)
+function projectedImages = cylindrical(images, f, k1, k2)
     projectedImages = zeros(size(images));
 
     width = size(images, 2);
