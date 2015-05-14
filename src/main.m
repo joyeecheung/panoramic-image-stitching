@@ -4,7 +4,7 @@ function main
     run(strcat(VLFEATROOT, '/toolbox/vl_setup'))
 
     % read images
-    dataDir = '../data/';
+    dataDir = '../data2/testingImages/';
     files = dir(strcat(dataDir, '*.jpg'));
 
     disp('Start reading images');
@@ -30,7 +30,9 @@ function main
     disp('Image stiching starts');
     [stitched, yshift_total] = stitch(croppedImages);
     disp('Image stiching ends');
+
     fprintf('yshift_total = %f\n', yshift_total);
+    imwrite(stitched, '../result/stitched_raw.jpg')
 
     disp('Drift correcting starts');
     corrected = correctDrift(stitched, yshift_total);

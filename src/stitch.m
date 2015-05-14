@@ -24,6 +24,8 @@ function [panorama, yshift_total] = stitch(images)
         else
             blended = blendTwo(blended, Ib, xshift_cur, yshift_cur);
         end
+
+        imwrite(blended, sprintf('../result/blended_%d.jpg', i));
     end
 
     panorama = blended;
